@@ -172,6 +172,12 @@ function register_block_core_navigation() {
 
 add_action( 'init', 'register_block_core_navigation' );
 
+/**
+ * Filter that changes the parsed attribute values of navigation blocks contain typographic presets to contain the values directly.
+ *
+ * @param array $parsed_block The block being rendered.
+ * @return array The block being rendered without typographic presets.
+ */
 function block_core_navigation_typographic_presets_backcompatibility( $parsed_block ) {
 	if ( 'core/navigation' === $parsed_block['blockName'] ) {
 		$attribute_to_prefix_map = array(
@@ -195,5 +201,4 @@ function block_core_navigation_typographic_presets_backcompatibility( $parsed_bl
 	}
 	return $parsed_block;
 }
-
 add_filter( 'render_block_data', 'block_core_navigation_typographic_presets_backcompatibility' );
