@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Platform } from '@wordpress/element';
-import { getBlockSupport } from '@wordpress/blocks';
+import { getBlockSupport, getBlockType } from '@wordpress/blocks';
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
 /**
@@ -65,6 +65,15 @@ export function PaddingEdit( props ) {
 		} );
 	};
 
+	const onReset = () => {
+		const blockType = getBlockType( blockName );
+		const defaultSettings = blockType?.attributes?.style?.default;
+
+		setAttributes( {
+			style: cleanEmptyObject( defaultSettings ),
+		} );
+	};
+
 	return Platform.select( {
 		web: (
 			<>
@@ -72,6 +81,7 @@ export function PaddingEdit( props ) {
 					values={ style?.spacing?.padding }
 					onChange={ onChange }
 					onChangeShowVisualizer={ onChangeShowVisualizer }
+					onReset={ onReset }
 					label={ __( 'Padding' ) }
 					units={ units }
 				/>
