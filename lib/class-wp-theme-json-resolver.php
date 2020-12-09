@@ -125,14 +125,13 @@ class WP_Theme_JSON_Resolver {
 	private static function apply_theme_json_translations( &$theme_json_structure, $domain = 'default' ) {
 		$theme_json_i18n = self::get_theme_json_i18n();
 		foreach ( $theme_json_structure as &$context_value ) {
-			if ( empty( $context_value ) || empty( $context_value['settings'] ) ) {
+			if ( empty( $context_value ) ) {
 				continue;
 			}
-			$settings = &$context_value['settings'];
 			foreach ( $theme_json_i18n as $theme_json_i18n_value ) {
 				$path               = $theme_json_i18n_value['path'];
 				$translatable_keys  = $theme_json_i18n_value['translatable_keys'];
-				$array_to_translate = gutenberg_experimental_get( $settings, $path, null );
+				$array_to_translate = gutenberg_experimental_get( $context_value, $path, null );
 				if ( null === $array_to_translate ) {
 					continue;
 				}
@@ -146,7 +145,7 @@ class WP_Theme_JSON_Resolver {
 						// phpcs:enable
 					}
 				}
-				gutenberg_experimental_set( $settings, $path, $array_to_translate );
+				gutenberg_experimental_set( $context_value, $path, $array_to_translate );
 			}
 		}
 	}
