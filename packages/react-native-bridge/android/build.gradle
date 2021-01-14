@@ -4,6 +4,10 @@ buildscript {
             ? false : (rootProject.ext.has("buildGutenbergMobileJSBundle")
                     && rootProject.ext.buildGutenbergMobileJSBundle)
 
+    if (project.properties['buildJsBundle'].asBoolean() == true) {
+        buildGutenbergMobileJSBundle = true
+    }
+
     ext.kotlinVersion = '1.3.61'
 
     repositories {
@@ -42,6 +46,10 @@ def buildGutenbergMobileJSBundle =
         System.getenv('SUPPRESS_GUTENBERG_MOBILE_JS_BUNDLE_BUILD').asBoolean()
         ? false : (rootProject.ext.has("buildGutenbergMobileJSBundle")
                 && rootProject.ext.buildGutenbergMobileJSBundle)
+
+if (project.properties['buildJsBundle'].asBoolean() == true) {
+    buildGutenbergMobileJSBundle = true
+}
 
 def tempFolder = "${System.getenv('TMPDIR')}/jsbundle/${System.getenv('VERSION')}"
 def nodeFolder = file("${tempFolder}/nodejs")
