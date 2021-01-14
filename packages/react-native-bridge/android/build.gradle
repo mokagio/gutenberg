@@ -4,7 +4,7 @@ buildscript {
             ? false : (rootProject.ext.has("buildGutenbergMobileJSBundle")
                     && rootProject.ext.buildGutenbergMobileJSBundle)
 
-    if (project.properties['buildJsBundle'].asBoolean() == true) {
+    if (project.properties['forceBuildJsBundle'].asBoolean() == true) {
         buildGutenbergMobileJSBundle = true
     }
 
@@ -47,7 +47,7 @@ def buildGutenbergMobileJSBundle =
         ? false : (rootProject.ext.has("buildGutenbergMobileJSBundle")
                 && rootProject.ext.buildGutenbergMobileJSBundle)
 
-if (project.properties['buildJsBundle'].asBoolean() == true) {
+if (project.properties['forceBuildJsBundle'].asBoolean() == true) {
     buildGutenbergMobileJSBundle = true
 }
 
